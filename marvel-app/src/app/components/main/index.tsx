@@ -5,25 +5,32 @@ import styles from './main.module.css'
 import Image from 'next/image';
 import iconHeart from '../../../../public/icon_Heart.png'
 import Pagination from '../pagination';
+import {searchCharacterByNameUrl, searchCharactersUrl} from '@/app/api/index'
 
 export default function Main() {
   const [searchInput, setSearchInput] = useState("");
   const [result, setResult] = useState<any[]>([])
-  const [loading, setLoading] = useState(false)
   const [total, setTotal] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const heroLimit = 20
 
 
   const handleKeyDown = (event: { key: string; }) => {
     if(event.key === 'Enter') {
-      searchCharacterByName()
+      if(searchInput !== '') {
+        searchCharacterByName()
+        return
+      }
+      searchCharacters()
     }
   }
 
-  const searchCharacters = async () => {
+  const searchCharacters = async (currentPageNumber = 1) => {
     try {
         setLoading(true)
         const res = await fetch(
-            `https://gateway.marvel.com/v1/public/characters?orderBy=name&apikey=380238e7b66ee649001c8f670be0101b`,
+          searchCharactersUrl(Math.ceil(heroLimit*currentPageNumber-1)),
             {
                 method: 'GET',
             }
@@ -39,11 +46,11 @@ export default function Main() {
     }
   };
 
-  const searchCharacterByName = async () => {
+  const searchCharacterByName = async (currentPageNumber = 1) => {
     try {
         setLoading(true)
         const res = await fetch(
-            `https://gateway.marvel.com/v1/public/characters?nameStartsWith=${searchInput}&orderBy=name&apikey=380238e7b66ee649001c8f670be0101b`,
+          searchCharacterByNameUrl(searchInput, Math.ceil(heroLimit*(currentPageNumber-1))),
             {
                 method: 'GET',
             }
@@ -58,11 +65,18 @@ export default function Main() {
         setLoading(false)
     }
   };
-
 
   useEffect(() => {
     searchCharacters()
   }, []);
+
+  useEffect(() => {
+    if(searchInput !== '') {
+      searchCharacterByName(currentPage)
+      return
+    }
+    searchCharacters(currentPage)
+  }, [currentPage])
 
   return (
     <div className={styles.flexContainer}>
@@ -106,6 +120,10 @@ export default function Main() {
       </div>
       <div className={styles.row}>
       <Pagination
+        heroLimit={heroLimit}
+        total={total}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
       />
       </div>
     </div>

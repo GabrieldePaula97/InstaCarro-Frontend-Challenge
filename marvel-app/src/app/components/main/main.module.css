@@ -1,0 +1,158 @@
+.flexContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0em;
+}
+
+.row {
+  width: 75vw;
+  margin-bottom: 32px;
+}
+
+.title {
+  color: #212121;
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 56px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #21212199;
+}
+
+.icon {
+  padding: 10px;
+  min-width: 40px;
+}
+
+.searchBar {
+  height: 75px;
+  padding: 0px 48px 0px 8vw;
+  border-radius: 100px;
+  background: #F99A9933;
+  color: #F99A99;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  border-color: transparent;
+  background-image: url('../../../../public/icon\ _Search.png');
+  background-position: 3vw 21px; 
+  background-repeat: no-repeat;
+  width: 80%;
+}
+
+.searchBar::placeholder {
+  color: #F99A99CC;
+  opacity: 1;
+}
+
+.searchBar:focus{
+  outline: none;
+}
+
+.headerResult {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.resultTotal {
+  text-align: left;
+  color:#C5C5C5;
+}
+
+
+.favoritesButton {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #F43735B2;
+  border: 0;
+  background-color: transparent;
+  background:url('../../../../public/icon_Heart.png') no-repeat left center;
+  padding-left:38px;
+}
+
+.favoritesButton:hover, .addToFavorite:hover {
+  cursor: pointer;
+}
+
+.heroCard {
+  width: auto;
+  border-radius: 10px;
+  border: 1px;
+  color: #C6C6C6;
+  border: 1px solid #C6C6C6;
+  padding: 10px;
+  min-height: 350px;
+}
+
+.heroContainer, .searchBarContainer {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-flow: row wrap;
+}
+
+.heroContainer  > div {
+  position: unset !important;
+}
+
+.heroImage {
+  object-fit: fill;
+  width: 100% !important;
+  position: relative !important;
+  height: 169px !important;
+}
+
+.heroName {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #212121;
+  width: 239px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.heroDescription {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #212121;
+  width: 239px;
+  margin-bottom: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(25%, auto));
+  column-gap: 20px;
+  row-gap: 20px;
+  max-width: 100%;
+  width: var(--max-width);
+}

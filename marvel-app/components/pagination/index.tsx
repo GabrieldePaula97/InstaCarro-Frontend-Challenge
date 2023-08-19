@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './pagination.module.css'
-import iconPrev from '../../../../public/icon_chevron-left.png'
-import iconNext from '../../../../public/icon_chevron-right.png'
+import iconPrev from '../../public/icon_chevron-left.png'
+import iconNext from '../../public/icon_chevron-right.png'
 import Image from 'next/image';
 
 const Pagination = (props: {heroLimit: number, total: number, setCurrentPage: any, currentPage: number}) => {

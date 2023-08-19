@@ -49,7 +49,7 @@
   letter-spacing: 0em;
   text-align: left;
   border-color: transparent;
-  background-image: url('../../../../public/icon\ _Search.png');
+  background-image: url('../../public/icon\ _Search.png');
   background-position: 3vw 21px; 
   background-repeat: no-repeat;
   width: 80%;
@@ -87,7 +87,7 @@
   color: #F43735B2;
   border: 0;
   background-color: transparent;
-  background:url('../../../../public/icon_Heart.png') no-repeat left center;
+  background:url('../../public/icon_Heart.png') no-repeat left center;
   padding-left:38px;
   user-select: none;
 }

@@ -3,9 +3,9 @@
 import React, {useState, useEffect} from 'react'
 import styles from './main.module.css'
 import Image from 'next/image';
-import iconHeart from '../../../../public/icon_Heart.png'
+import iconHeart from '../../public/icon_Heart.png'
 import Pagination from '../pagination';
-import {searchCharacterByNameUrl, searchCharactersUrl} from '@/app/api/index'
+import {searchCharacterByNameUrl, searchCharactersUrl} from '../../app/api'
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 
 export default function Main() {

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import iconHeart from '../../../../public/icon_Heart.png'
 import Pagination from '../pagination';
 import {searchCharacterByNameUrl, searchCharactersUrl} from '@/app/api/index'
+import LoadingSpinner from '../loading-spinner/loading-spinner';
 
 export default function Main() {
   const [searchInput, setSearchInput] = useState("");
@@ -31,7 +32,7 @@ export default function Main() {
     try {
         setLoading(true)
         const res = await fetch(
-          searchCharactersUrl(Math.ceil(heroLimit*currentPageNumber-1)),
+          searchCharactersUrl(Math.ceil(heroLimit*(currentPageNumber-1))),
             {
                 method: 'GET',
             }
@@ -99,8 +100,9 @@ export default function Main() {
         </div>
       </div>
       <div className={styles.row}>
-        <div className={styles.grid}>
-          {loading && result.length ? '' : result.map((hero: any) => {
+        {loading && result.length ? <LoadingSpinner/> : 
+        (<div className={styles.grid}>
+          {result.map((hero: any) => {
             return (
               <div className={styles.heroCard} key={hero.id}>
                 <div className={styles.heroContainer}>
@@ -114,10 +116,8 @@ export default function Main() {
                   <p className={styles.heroDescription}>{hero.description}</p>
                 </div>
               </div>
-            )}
-          )}
-        </div>
-       
+            )})}
+        </div>)}
       </div>
       <div className={styles.row}>
       <Pagination

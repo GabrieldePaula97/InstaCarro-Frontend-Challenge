@@ -1,14 +1,3 @@
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem 6rem 0 6rem;
-  min-height: 100vh;
-  background-color: white;
-  color: black;
-}
-
 .flexContainer {
   align-items: center;
   display: flex;
@@ -19,4 +8,32 @@
   font-weight: 500;
   line-height: 28px;
   letter-spacing: 0em;
+}
+
+.row {
+  width: 75vw;
+  margin-bottom: 40px;
+}
+
+.rowComic {
+  width: 75vw;
+  margin-top: 80px;
+}
+
+.header {
+  width: 100%;
+  min-height: 450px;
+  background:url('../../public/Background.png') no-repeat local;
+}
+
+.title {
+  color: #FFFFFF;
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 56px;
+  letter-spacing: 0em;
+  text-align: left;
+  user-select: none;
+  width: 500px;
+  margin-top: 100px;
 }

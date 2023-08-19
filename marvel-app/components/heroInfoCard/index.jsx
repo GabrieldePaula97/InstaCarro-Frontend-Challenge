@@ -8,12 +8,11 @@ export default function HeroInfoCard({name, description, thumb}) {
     <div className={styles.heroInfoCard}>
       <div className={styles.grid}>
         <div className={styles.heroImageContainer}>
-        {/* <Image src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} alt={''}  width={200} height={212} className={styles.heroImage}></Image> */}
         <Image src={thumb} alt={''}  width={200} height={212} className={styles.heroImage}></Image>
         </div>
         <div className={styles.heroInfoContainer}>
           <div className={styles.heroName}>{name}</div>
-          <div className={styles.heroDescription}>{description}</div>
+          <div className={styles.heroDescription}>{description || 'No description found'}</div>
         </div>
       </div>
     </div>

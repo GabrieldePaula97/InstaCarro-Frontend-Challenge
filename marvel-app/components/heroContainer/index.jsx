@@ -5,7 +5,7 @@ import styles from './heroContainer.module.css'
 import HeroInfoCard from '../heroInfoCard'
 import ComicInfoCard from '../comicInfoCard'
 
-export default function HeroContainer() {
+export default function HeroContainer({name, description, thumb, id}) {
   return (
     <div className={styles.flexContainer}>
         <div className={styles.header}>
@@ -14,8 +14,11 @@ export default function HeroContainer() {
               <p className={styles.title}>DESCUBRA TODOS OS QUADRINHOS DESTE PERSONAGEM</p>
             </div>
             <div className={styles.row}>
-              <HeroInfoCard>
-              </HeroInfoCard>
+              <HeroInfoCard 
+              name={name}
+              description={description}
+              thumb={thumb}
+              />
             </div>
             <div className={styles.rowComic}>
               <ComicInfoCard></ComicInfoCard>

@@ -7,6 +7,8 @@ import iconHeart from '../../public/icon_Heart.png'
 import Pagination from '../pagination';
 import {searchCharacterByNameUrl, searchCharactersUrl} from '../../app/api'
 import LoadingSpinner from '../loading-spinner/loading-spinner';
+import Link from 'next/link';
+
 
 export default function Main() {
   const [searchInput, setSearchInput] = useState("");
@@ -107,11 +109,17 @@ export default function Main() {
               <div className={styles.heroCard} key={hero.id}>
                 <div className={styles.heroContainer}>
                   <Image src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} alt={''} layout="fill" className={styles.heroImage}></Image>
-
-                  <div className={styles.heroName}>
-                    {hero.name}
-                  <Image src={iconHeart} alt={''} className={styles.addToFavorite}/>
-                  </div>
+                  <Link className={styles.heroName} href={{
+                    pathname: '/heroPage',
+                    query: {
+                      id: hero.id,
+                      name: hero.name,
+                      description: hero.description,
+                      thumb: `${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                    }}>
+                      {hero.name}
+                      <Image src={iconHeart} alt={''} className={styles.addToFavorite}/>
+                    </Link>
 
                   <p className={styles.heroDescription}>{hero.description}</p>
                 </div>

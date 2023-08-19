@@ -23,7 +23,7 @@
 .header {
   width: 100%;
   min-height: 450px;
-  background:url('../../public/Background.png') no-repeat local;
+  background:url('../../public/background.png') no-repeat local;
 }
 
 .title {

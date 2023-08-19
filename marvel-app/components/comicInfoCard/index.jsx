@@ -5,7 +5,7 @@ export default function ComicInfoCard({comic}) {
   return (
     <div className={styles.comicInfoCard}>
       <div className={styles.grid}>
-          <div className={styles.comicImageContainer} />
+          <div className={styles.comicImageContainer} style={{background: `url(${`${comic.thumbnail.path}.${comic.thumbnail.extension}`}) center center / cover no-repeat`}}/>
           <div className={styles.comicInfoContainer}>
             <div className={styles.comicName}>{comic.title}</div>
             <div className={styles.comicData}>{`01/01/1990`} 0 {`${comic.pageCount} pages`}</div>

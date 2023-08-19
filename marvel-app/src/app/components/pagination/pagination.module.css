@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  gap: 10px;
 }
 
 .pageButton {
@@ -19,12 +20,80 @@
   justify-content: center;
   width: 42px;
   height: 36px;
+  border-radius: 4px;  
+  box-shadow: 0px 1px 4px 0px #00000033;
+  user-select: none;
+}
+
+.pageButton:hover, .nextPrevButton:hover {
+  cursor: pointer;
+  user-select: none;
+}
+
+.pageButtonCurrentPage {
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 36px;
+  border-radius: 4px;  
+  box-shadow: 0px 1px 4px 0px #00000033;
+  user-select: none;
+  border: 1px solid #F43735;
+}
+
+.disabledPageButton {
+  color: #000000;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 36px;
   border-radius: 4px;
   border: 1px solid #F43735;
   box-shadow: 0px 1px 4px 0px #00000033;
-  
+  pointer-events:none; 
+  opacity:0.6;
+  user-select: none;
+  cursor: default;
 }
 
-.pageButton:hover {
-  cursor: pointer;
+.nextPrevButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 36px;
+  border-radius: 4px;
+  border: 1px solid #F43735;
+  box-shadow: 0px 1px 4px 0px #00000033;
+  user-select: none;
+  background: #F43735;
+}
+
+.disabledNextPrevButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 36px;
+  border-radius: 4px;
+  border: 1px solid #F43735;
+  box-shadow: 0px 1px 4px 0px #00000033;
+  background: #F43735;
+  pointer-events:none; 
+  opacity:0.6;
+  user-select: none;
+  cursor: default;
 }

@@ -18,6 +18,7 @@ export default function Main() {
 
   const handleKeyDown = (event: { key: string; }) => {
     if(event.key === 'Enter') {
+      setCurrentPage(1)
       if(searchInput !== '') {
         searchCharacterByName()
         return

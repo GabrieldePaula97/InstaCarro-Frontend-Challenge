@@ -22,16 +22,19 @@
   line-height: 56px;
   letter-spacing: 0em;
   text-align: center;
+  user-select: none;
 }
 
 .subtitle {
   text-align: center;
   color: #21212199;
+  user-select: none;
 }
 
 .icon {
   padding: 10px;
   min-width: 40px;
+  user-select: none;
 }
 
 .searchBar {
@@ -71,6 +74,7 @@
 .resultTotal {
   text-align: left;
   color:#C5C5C5;
+  user-select: none;
 }
 
 
@@ -85,6 +89,7 @@
   background-color: transparent;
   background:url('../../../../public/icon_Heart.png') no-repeat left center;
   padding-left:38px;
+  user-select: none;
 }
 
 .favoritesButton:hover, .addToFavorite:hover {

@@ -121,7 +121,7 @@ export default function Main() {
                       <Image src={iconHeart} alt={''} className={styles.addToFavorite}/>
                     </Link>
 
-                  <p className={styles.heroDescription}>{hero.description}</p>
+                  <p className={styles.heroDescription}>{hero?.description || 'No description found'}</p>
                 </div>
               </div>
             )})}

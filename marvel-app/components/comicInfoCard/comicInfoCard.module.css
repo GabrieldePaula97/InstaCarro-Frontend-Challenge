@@ -19,8 +19,9 @@
 .comicInfoContainer {
   min-height: 265px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: column;
+  row-gap: 15px;
 }
 
 .comicName {

@@ -5,13 +5,12 @@ export default function ComicInfoCard({comic}) {
   return (
     <div className={styles.comicInfoCard}>
       <div className={styles.grid}>
-        <div className={styles.comicImageContainer}>
-        </div>
-        <div className={styles.comicInfoContainer}>
-          <div className={styles.comicName}>{'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium metus interdum dolor.'}</div>
-          <div className={styles.comicData}>{`01/01/1990`} 0 {`47 pages`}</div>
-          <div className={styles.comicDescription}>{'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium...'}</div>
-        </div>
+          <div className={styles.comicImageContainer} />
+          <div className={styles.comicInfoContainer}>
+            <div className={styles.comicName}>{comic.title}</div>
+            <div className={styles.comicData}>{`01/01/1990`} 0 {`${comic.pageCount} pages`}</div>
+            <div className={styles.comicDescription}>{comic?.description ? comic?.description?.slice(0, 200) + '...' : 'No description found' }</div>
+          </div>
       </div>
     </div>
   )

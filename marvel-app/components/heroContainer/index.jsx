@@ -21,7 +21,6 @@ export default function HeroContainer({name, description, thumb, id}) {
             }
         );
         const response = await res.json();
-        // console.log(response.data);
         setResult(response.data.results)
         setLoading(false)
     } catch (err) {

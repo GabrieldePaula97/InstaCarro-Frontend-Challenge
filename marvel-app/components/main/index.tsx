@@ -22,6 +22,7 @@ export default function Main() {
   const [showOnlyFavs, setShowOnlyFavs] = useState(false)
   const [favsTotal, setTotalFavs] = useState(0)
   const [favCurrentPage, setFavCurrentPage] = useState(1)
+  const [currentFavorites, setCurrentFavorites] = useState(useSelector((state: any) => state.favorites.favorites))
   const heroLimit = 20
 
   const favorites = useSelector((state: any) => state.favorites.favorites)
@@ -36,12 +37,12 @@ export default function Main() {
       favoritesToUpdate = [...favorites, heroToInsert]
     }
     favoritesToUpdate.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+    setCurrentFavorites(favoritesToUpdate)
     setTotalFavs(favoritesToUpdate.length)
-    console.log({favorites, hero, favoritesToUpdate})
     dispatch(setFavorites({payload: {favoritesToUpdate}}))
   }
 
-  const isFavorite = (id: any) => favorites.some((favorite: any) => favorite.id === id)
+  const isFavorite = (id: any) => currentFavorites.some((favorite: any) => favorite.id === id)
 
   const handleKeyDown = (event: { key: string; }) => {
     if(event.key === 'Enter') {
@@ -94,6 +95,7 @@ export default function Main() {
 
   useEffect(() => {
     searchCharacters()
+    setTotalFavs(currentFavorites?.length)
   }, []);
 
   useEffect(() => {
@@ -126,7 +128,7 @@ export default function Main() {
       <div className={styles.row}>
         {loading && result.length ? <LoadingSpinner/> : 
         (<div className={styles.grid}>
-          {(showOnlyFavs ? favorites.slice((favCurrentPage-1)*heroLimit, (((favCurrentPage-1)*heroLimit)+ heroLimit)) : result).map((hero: any) => {
+          {(showOnlyFavs ? currentFavorites.slice((favCurrentPage-1)*heroLimit, (((favCurrentPage-1)*heroLimit)+ heroLimit)) : result).map((hero: any) => {
             return (
               <div className={styles.heroCard} key={hero.id}>
                 <div className={styles.heroContainer}>

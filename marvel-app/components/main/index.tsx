@@ -38,7 +38,7 @@ export default function Main() {
     dispatch(setFavorites({payload: {favoritesToUpdate}}))
   }
 
-  const isFavorite = (id) => favorites.some((favorite: any) => favorite.id === id)
+  const isFavorite = (id: any) => favorites.some((favorite: any) => favorite.id === id)
 
   const handleKeyDown = (event: { key: string; }) => {
     if(event.key === 'Enter') {
@@ -130,18 +130,19 @@ export default function Main() {
               <div className={styles.heroCard} key={hero.id}>
                 <div className={styles.heroContainer}>
                   <Image src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} alt={''} layout="fill" className={styles.heroImage}></Image>
-                  <Link className={styles.heroName} href={{
-                    pathname: '/heroPage',
-                    query: {
-                      id: hero.id,
-                      name: hero.name,
-                      description: hero.description,
-                      thumb: `${hero.thumbnail.path}.${hero.thumbnail.extension}`}
-                    }}>
-                      {hero.name}
-                    </Link>
-                    <Image src={isFavorite(hero.id) ? iconHeart : iconHeartEmpty} alt={''} className={styles.addToFavorite} onClick={() => handleAddToFavorite(hero)}/>
-
+                  <div className={styles.linkDiv}>
+                    <Link className={styles.heroName} href={{
+                      pathname: '/heroPage',
+                      query: {
+                        id: hero.id,
+                        name: hero.name,
+                        description: hero.description,
+                        thumb: `${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                      }}>
+                        {hero.name}
+                      </Link>
+                      <Image src={isFavorite(hero.id) ? iconHeart : iconHeartEmpty} alt={''} className={styles.addToFavorite} onClick={() => handleAddToFavorite(hero)}/>
+                  </div>
                   <p className={styles.heroDescription}>{hero?.description || 'No description found'}</p>
                 </div>
               </div>

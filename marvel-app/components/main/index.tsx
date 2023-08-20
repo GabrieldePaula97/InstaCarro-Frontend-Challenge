@@ -2,10 +2,11 @@
 
 import React, {useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setFavorites, setInitialState } from '../../redux/favoriteSlice'
+import { setFavorites } from '../../redux/favoriteSlice'
 import styles from './main.module.css'
 import Image from 'next/image';
 import iconHeart from '../../public/icon_Heart.png'
+import iconHeartEmpty from '../../public/icon_Heart-empty_.png'
 import Pagination from '../pagination';
 import {searchCharacterByNameUrl, searchCharactersUrl} from '../../app/api'
 import LoadingSpinner from '../loading-spinner/loading-spinner';
@@ -18,18 +19,26 @@ export default function Main() {
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [showOnlyFavs, setShowOnlyFavs] = useState(false)
   const heroLimit = 20
 
   const favorites = useSelector((state: any) => state.favorites.favorites)
   const dispatch = useDispatch()
 
   const handleAddToFavorite = (hero: any) => {
-    const favoritesUpdated = [...favorites]
-    // if(favoritesUpdated)
-    favoritesUpdated.push(hero)
-    console.log({favorites, hero, favoritesUpdated})
-    dispatch(setFavorites({payload: {favoritesUpdated}}))
+    let favoritesToUpdate = [...favorites]
+    if(favorites.some((favorite: any) => favorite.id === hero.id)) {
+      favoritesToUpdate = favorites.filter((favorite: any) => favorite.id !== hero.id)
+    } else {
+      const heroToInsert = {...hero}
+      favoritesToUpdate = [...favorites, heroToInsert]
+    }
+    favoritesToUpdate.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+    console.log({favorites, hero, favoritesToUpdate})
+    dispatch(setFavorites({payload: {favoritesToUpdate}}))
   }
+
+  const isFavorite = (id) => favorites.some((favorite: any) => favorite.id === id)
 
   const handleKeyDown = (event: { key: string; }) => {
     if(event.key === 'Enter') {
@@ -94,10 +103,6 @@ export default function Main() {
     searchCharacters(currentPage)
   }, [currentPage])
 
-  useEffect(() => {
-    console.log('MUDOU', {favorites})
-  }, [favorites])
-
   return (
     <div className={styles.flexContainer}>
       <div className={styles.row}>
@@ -111,16 +116,16 @@ export default function Main() {
       </div>
       <div className={styles.row}>
         <div className={styles.headerResult}>
-          <p className={styles.resultTotal}>Encontrados {total} heróis</p>
-          <button className={styles.favoritesButton}>
-            Somente favoritos {favorites?.length}
+          <p className={styles.resultTotal}>Encontrados {showOnlyFavs ? favorites?.length : total} heróis</p>
+          <button className={styles.favoritesButton} onClick={() => setShowOnlyFavs(!showOnlyFavs)}>
+            Somente favoritos
           </button>
         </div>
       </div>
       <div className={styles.row}>
         {loading && result.length ? <LoadingSpinner/> : 
         (<div className={styles.grid}>
-          {result.map((hero: any) => {
+          {(showOnlyFavs ? favorites : result).map((hero: any) => {
             return (
               <div className={styles.heroCard} key={hero.id}>
                 <div className={styles.heroContainer}>
@@ -135,7 +140,7 @@ export default function Main() {
                     }}>
                       {hero.name}
                     </Link>
-                    <Image src={iconHeart} alt={''} className={styles.addToFavorite} onClick={() => handleAddToFavorite(hero)}/>
+                    <Image src={isFavorite(hero.id) ? iconHeart : iconHeartEmpty} alt={''} className={styles.addToFavorite} onClick={() => handleAddToFavorite(hero)}/>
 
                   <p className={styles.heroDescription}>{hero?.description || 'No description found'}</p>
                 </div>

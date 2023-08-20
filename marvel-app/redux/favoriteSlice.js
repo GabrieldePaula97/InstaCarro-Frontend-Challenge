@@ -9,8 +9,8 @@ export const favoritesSlice = createSlice({
   initialState,
   reducers: {
       setFavorites: (state, action) => {
-        console.log(state.favorites, action.payload.payload.favoritesUpdated)
-        state.favorites = action.payload.payload.favoritesUpdated
+        console.log(state.favorites, action.payload.payload.favoritesToUpdate)
+        state.favorites = action.payload.payload.favoritesToUpdate
       },
       setInitialState: (state) => {
         state.favorites = []

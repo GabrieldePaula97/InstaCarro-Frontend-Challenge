@@ -20,6 +20,8 @@ export default function Main() {
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [showOnlyFavs, setShowOnlyFavs] = useState(false)
+  const [favsTotal, setTotalFavs] = useState(0)
+  const [favCurrentPage, setFavCurrentPage] = useState(1)
   const heroLimit = 20
 
   const favorites = useSelector((state: any) => state.favorites.favorites)
@@ -34,6 +36,7 @@ export default function Main() {
       favoritesToUpdate = [...favorites, heroToInsert]
     }
     favoritesToUpdate.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+    setTotalFavs(favoritesToUpdate.length)
     console.log({favorites, hero, favoritesToUpdate})
     dispatch(setFavorites({payload: {favoritesToUpdate}}))
   }
@@ -61,7 +64,6 @@ export default function Main() {
             }
         );
         const response = await res.json();
-        // console.log(response.data);
         setResult(response.data.results)
         setTotal(response.data.total)
         setLoading(false)
@@ -81,7 +83,6 @@ export default function Main() {
             }
         );
         const response = await res.json();
-        // console.log(response.data);
         setResult(response.data.results)
         setTotal(response.data.total)
         setLoading(false)
@@ -116,7 +117,7 @@ export default function Main() {
       </div>
       <div className={styles.row}>
         <div className={styles.headerResult}>
-          <p className={styles.resultTotal}>Encontrados {showOnlyFavs ? favorites?.length : total} heróis</p>
+          <p className={styles.resultTotal}>Encontrados {showOnlyFavs ? favsTotal : total} heróis</p>
           <button className={styles.favoritesButton} onClick={() => setShowOnlyFavs(!showOnlyFavs)}>
             Somente favoritos
           </button>
@@ -125,7 +126,7 @@ export default function Main() {
       <div className={styles.row}>
         {loading && result.length ? <LoadingSpinner/> : 
         (<div className={styles.grid}>
-          {(showOnlyFavs ? favorites : result).map((hero: any) => {
+          {(showOnlyFavs ? favorites.slice((favCurrentPage-1)*heroLimit, (((favCurrentPage-1)*heroLimit)+ heroLimit)) : result).map((hero: any) => {
             return (
               <div className={styles.heroCard} key={hero.id}>
                 <div className={styles.heroContainer}>
@@ -152,9 +153,9 @@ export default function Main() {
       <div className={styles.row}>
       <Pagination
         heroLimit={heroLimit}
-        total={total}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
+        total={showOnlyFavs ? favsTotal : total}
+        setCurrentPage={showOnlyFavs ? setFavCurrentPage : setCurrentPage}
+        currentPage={showOnlyFavs ? favCurrentPage : currentPage}
       />
       </div>
     </div>

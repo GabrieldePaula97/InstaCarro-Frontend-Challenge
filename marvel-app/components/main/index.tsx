@@ -1,6 +1,8 @@
 'use client'
 
 import React, {useState, useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setFavorites, setInitialState } from '../../redux/favoriteSlice'
 import styles from './main.module.css'
 import Image from 'next/image';
 import iconHeart from '../../public/icon_Heart.png'
@@ -18,6 +20,16 @@ export default function Main() {
   const [currentPage, setCurrentPage] = useState(1)
   const heroLimit = 20
 
+  const favorites = useSelector((state: any) => state.favorites.favorites)
+  const dispatch = useDispatch()
+
+  const handleAddToFavorite = (hero: any) => {
+    const favoritesUpdated = [...favorites]
+    // if(favoritesUpdated)
+    favoritesUpdated.push(hero)
+    console.log({favorites, hero, favoritesUpdated})
+    dispatch(setFavorites({payload: {favoritesUpdated}}))
+  }
 
   const handleKeyDown = (event: { key: string; }) => {
     if(event.key === 'Enter') {
@@ -40,7 +52,7 @@ export default function Main() {
             }
         );
         const response = await res.json();
-        console.log(response.data);
+        // console.log(response.data);
         setResult(response.data.results)
         setTotal(response.data.total)
         setLoading(false)
@@ -60,7 +72,7 @@ export default function Main() {
             }
         );
         const response = await res.json();
-        console.log(response.data);
+        // console.log(response.data);
         setResult(response.data.results)
         setTotal(response.data.total)
         setLoading(false)
@@ -82,6 +94,10 @@ export default function Main() {
     searchCharacters(currentPage)
   }, [currentPage])
 
+  useEffect(() => {
+    console.log('MUDOU', {favorites})
+  }, [favorites])
+
   return (
     <div className={styles.flexContainer}>
       <div className={styles.row}>
@@ -97,7 +113,7 @@ export default function Main() {
         <div className={styles.headerResult}>
           <p className={styles.resultTotal}>Encontrados {total} heróis</p>
           <button className={styles.favoritesButton}>
-            Somente favoritos
+            Somente favoritos {favorites?.length}
           </button>
         </div>
       </div>
@@ -118,8 +134,8 @@ export default function Main() {
                       thumb: `${hero.thumbnail.path}.${hero.thumbnail.extension}`}
                     }}>
                       {hero.name}
-                      <Image src={iconHeart} alt={''} className={styles.addToFavorite}/>
                     </Link>
+                    <Image src={iconHeart} alt={''} className={styles.addToFavorite} onClick={() => handleAddToFavorite(hero)}/>
 
                   <p className={styles.heroDescription}>{hero?.description || 'No description found'}</p>
                 </div>
